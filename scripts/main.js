@@ -1,3 +1,3 @@
-require(["test"], function(test){
-	console.log(test.data);
+require(["binaryUtil"], function(binaryUtil){
+	window.binaryUtil = binaryUtil;
 });

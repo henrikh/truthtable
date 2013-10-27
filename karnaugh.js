@@ -1,23 +1,3 @@
-function grayCode(n) {
-	list = [];
-	for (var i = 0; i < Math.pow(2,n); i++) {
-		list.push(i);
-	};
-	return grayShuffle(list)
-}
-
-function grayShuffle (list) {
-	var lista, listb;
-	if(list.length <= 2){
-		return list
-	}
-
-	lista = grayShuffle(list.slice(0, list.length / 2));
-	listb = grayShuffle(list.slice(list.length / 2)).reverse();
-
-	return lista.concat(listb)
-}
-
 function generateKarnaughMap (symList, truthFunction) {
 	var truthTable;
 	if(symList.length > 4 || symList.length <= 1) {
@@ -32,21 +12,21 @@ function generateKarnaughMap (symList, truthFunction) {
         symListB = symList.slice(Math.ceil(symList.length/2));
     }
 
-	symAGray = grayCode(symListA.length);
-	symBGray = grayCode(symListB.length);
+	symAGray = binaryUtil.grayCode(symListA.length);
+	symBGray = binaryUtil.grayCode(symListB.length);
 
 	truthTable = [];
-	truthTable.push(symAGray.map(function(x){return toPaddedBinary(x, symListA.length)}));
+	truthTable.push(symAGray.map(function(x){return binaryUtil.toPaddedBinary(x, symListA.length)}));
 
 	for (var i = 0; i < symBGray.length; i++) {
 		rowList = [];
-		rowList.push(toPaddedBinary(symBGray[i], symListB.length));
+		rowList.push(binaryUtil.toPaddedBinary(symBGray[i], symListB.length));
 		for (var j = 0; j < symAGray.length; j++) {
-			pbA = toPaddedBinaryList(
+			pbA = binaryUtil.toPaddedBinaryList(
 				symAGray[j],
 				symListA.length);
 
-			pbB = toPaddedBinaryList(
+			pbB = binaryUtil.toPaddedBinaryList(
 				symBGray[i],
 				symListB.length);
 	

@@ -41,26 +41,13 @@ function genLaTeXTableRow () {
 
 // Internals
 
-function toPaddedBinary (decimal, width) {
-	binary = decimal.toString(2);
-	while(binary.length < width){
-		binary = "0" + binary;
-	}
-
-	return binary
-}
-
-toPaddedBinaryList = function(decimal, width) {
-	return toPaddedBinary(decimal, width).split("").map(function(x){return parseInt(x)})
-}
-
 generateTruthTable = function(inputList, truthFunction) {
 	inputCount = inputList.length;
 
 	truthTableList = [inputList.concat("f")];
 
 	for (var i = 0; i < Math.pow(2, inputCount); i++) {
-		binary = toPaddedBinaryList(i, inputCount);
+		binary = binaryUtil.toPaddedBinaryList(i, inputCount);
 		f = tf(truthFunction.apply(this, binary));
 		binary.push(f);
 		truthTableList.push(binary);

@@ -24,14 +24,13 @@ function generateKarnaughMap (symList, truthFunction) {
 		return false
 	}
 
-	symListA = symList.slice(0, Math.ceil(symList.length/2));
-	symListB = symList.slice(Math.ceil(symList.length/2));
-
 	if(flip){
-		_tmp = symListA;
-		symListA = symListB
-		symListB = _tmp;
-	}
+        symListB = symList.slice(0, Math.floor(symList.length/2));
+        symListA = symList.slice(Math.floor(symList.length/2));
+	} else {
+        symListA = symList.slice(0, Math.ceil(symList.length/2));
+        symListB = symList.slice(Math.ceil(symList.length/2));
+    }
 
 	symAGray = grayCode(symListA.length);
 	symBGray = grayCode(symListB.length);
@@ -72,14 +71,13 @@ function generateKarnaughMap (symList, truthFunction) {
 function genKarnaughTable (truthTable, symList, outputTable) {
 	var output = ""
 
-	symListA = symList.slice(0, Math.ceil(symList.length/2));
-	symListB = symList.slice(Math.ceil(symList.length/2));
-
 	if(flip){
-		_tmp = symListA;
-		symListA = symListB
-		symListB = _tmp;
-	}
+        symListB = symList.slice(0, Math.floor(symList.length/2));
+        symListA = symList.slice(Math.floor(symList.length/2));
+	} else {
+        symListA = symList.slice(0, Math.ceil(symList.length/2));
+        symListB = symList.slice(Math.ceil(symList.length/2));
+    }
 
 	output += '<tr><td colspan="2" rowspan="2"></td><td colspan="' + Math.pow(2,symListA.length) + '">' + symListA.join("") + '</td></tr>'
 

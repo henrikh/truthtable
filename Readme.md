@@ -3,7 +3,7 @@ Truth Table
 
 Truth table is a tool for generating truth tables and Karnaugh-maps.
 
-It can be found online at [http://truthtable.henrikenggaard.com]
+It can be found online at http://truthtable.henrikenggaard.com.
 
 Usage
 -----

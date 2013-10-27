@@ -5,6 +5,8 @@ Truth table is a tool for generating truth tables and Karnaugh-maps.
 
 It can be found online at http://truthtable.henrikenggaard.com.
 
+Roadmap etc. is at https://trello.com/b/fykXsXvf/truth-table
+
 Usage
 -----
 

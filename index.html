@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Truth Table generator</title>
+<style type="text/css">
+td {
+	border: 1px solid #DDD;
+	padding: 5px;
+	text-align: center;
+}
+
+table {
+	border-collapse: collapse;
+	display: inline-block;
+	font-size: 1.2em;
+	margin: 1em;
+}
+
+#truthtable td:last-child {
+	padding-left: 10px;
+}
+
+#truthtable td:nth-last-child(2) {
+	border-right: 1px solid black;
+}
+
+#truthtable td:nth-last-child(2) {
+	padding-right: 10px;
+}
+
+#truthtable tr:first-of-type td {
+	border-bottom: 1px solid black;
+}
+
+#tableContainer {
+	margin: 0 auto;
+	text-align: center;
+	width: 50%;
+}
+
+#expressionInput {
+	display: inline-block;
+	font-size: 1.2em;
+	width: 400px;
+}
+
+#inputDiv {
+	margin: 0 auto;
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+<div id="inputDiv"><input type="text" id="expressionInput" /><input type="checkbox" id="flip" name="flip"/><label for="flip">Flip MSB and LSB?</label></div>
+
+<p style="color:grey;font-style:italic;">Ex. ab + (c and (a xor b)) <p>
+
+<div id="tableContainer">
+<table id="truthtable"></table>
+
+<table id="karnaughtable"></table>
+</div>
+
+<script type="text/javascript" src="parser.js"></script>
+<script type="text/javascript" src="parsing.js"></script>
+<script type="text/javascript" src="truthtable.js"></script>
+<script type="text/javascript" src="karnaugh.js"></script>
+</body>
+</html>

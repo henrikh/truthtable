@@ -38,7 +38,7 @@ function generateKarnaughMap (symList, truthFunction) {
 
 			binary = pbA.concat(pbB)
 
-			f = tf(truthFunction.apply(this, binary));
+			f = tfConvert(truthFunction.apply(this, binary));
 			rowList.push(f);
 		};
 

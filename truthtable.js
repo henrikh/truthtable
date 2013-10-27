@@ -1,4 +1,4 @@
-function tf (x) {
+function tfConvert (x) {
 	return x ? 1 : 0
 }
 
@@ -48,7 +48,7 @@ generateTruthTable = function(inputList, truthFunction) {
 
 	for (var i = 0; i < Math.pow(2, inputCount); i++) {
 		binary = binaryUtil.toPaddedBinaryList(i, inputCount);
-		f = tf(truthFunction.apply(this, binary));
+		f = tfConvert(truthFunction.apply(this, binary));
 		binary.push(f);
 		truthTableList.push(binary);
 	};
@@ -58,13 +58,13 @@ generateTruthTable = function(inputList, truthFunction) {
 
 function parseAndGenerateTable(logicExpression) {
 	parsedExpression = parser.parse(logicExpression);
-	symList = generateSymlist(parsedExpression);
-	truthFunction = generateTruthFunction(symList, parsedExpression);
+	symList = truthfunction.symlist(parsedExpression);
+	tf = truthfunction.generate(symList, parsedExpression);
 
-	truthTable = generateTruthTable(symList, truthFunction);
+	truthTable = generateTruthTable(symList, tf);
 	genTable(truthTable, outputTruthTable);
 	
-	karnaughTable = generateKarnaughMap(symList, truthFunction);
+	karnaughTable = generateKarnaughMap(symList, tf);
 	genKarnaughTable(karnaughTable, symList, outputKarnaughTable);
 	
 	console.log(genLaTeXTable(truthTable));

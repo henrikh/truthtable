@@ -1,5 +1,5 @@
 function tfConvert (x) {
-	return x ? 1 : 0
+	return x ? 1 : 0;
 }
 
 // HTML-output
@@ -7,10 +7,10 @@ function tfConvert (x) {
 // x || y || z || a || b || c || d || e
 
 function genTable (truthTable, outputTable) {
-	output = ""
+	output = "";
 	for (var row = 0; row < truthTable.length; row++) {
 		output += genTableRow.apply(this,truthTable[row]);
-	};
+	}
 	outputTable.innerHTML = output;
 }
 
@@ -22,8 +22,8 @@ function genTableRow () {
 			item = item ? 1 : 0;
 		}
 		tableRowHTML += "<td>" + item + "</td>";
-	};
-	return tableRowHTML + "</tr>"
+	}
+	return tableRowHTML + "</tr>";
 }
 
 // Internals

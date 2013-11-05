@@ -9,10 +9,10 @@ define("truthTable", function(){
 			binary = binaryUtil.toPaddedBinaryList(i, inputCount);
 			binary.push(truthFunction.apply(this, binary));
 			truthTableList.push(binary);
-		};
+		}
 
-		return truthTableList
-	}
+		return truthTableList;
+	};
 
-	return exports
+	return exports;
 });

@@ -8,31 +8,34 @@ define("binaryUtil", function(){
 			binary = "0" + binary;
 		}
 
-		return binary
-	}
+		return binary;
+	};
 
 	exports.toPaddedBinaryList = function(decimal, width) {
-		return exports.toPaddedBinary(decimal, width).split("").map(function(x){return parseInt(x)})
-	}
+		return exports.toPaddedBinary(decimal, width).split("").map(
+			function(x){
+				return parseInt(x);
+			});
+	};
 
 	var grayShuffle = function(list) {
 		var lista, listb;
 		if(list.length <= 2){
-			return list
+			return list;
 		}
 
 		lista = grayShuffle(list.slice(0, list.length / 2));
 		listb = grayShuffle(list.slice(list.length / 2)).reverse();
 
-		return lista.concat(listb)
+		return lista.concat(listb);
 	};
 
 	exports.grayCode = function(n) {
 		list = [];
 		for (var i = 0; i < Math.pow(2,n); i++) {
 			list.push(i);
-		};
-		return grayShuffle(list)
+		}
+		return grayShuffle(list);
 	};
-	return exports
+	return exports;
 });

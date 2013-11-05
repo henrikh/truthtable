@@ -1,7 +1,7 @@
 function generateKarnaughMap (symList, truthFunction) {
 	var truthTable;
 	if(symList.length > 4 || symList.length <= 1) {
-		return false
+		return false;
 	}
 
 	if(flip){
@@ -16,7 +16,10 @@ function generateKarnaughMap (symList, truthFunction) {
 	symBGray = binaryUtil.grayCode(symListB.length);
 
 	truthTable = [];
-	truthTable.push(symAGray.map(function(x){return binaryUtil.toPaddedBinary(x, symListA.length)}));
+	truthTable.push(symAGray.map(
+		function(x){
+			return binaryUtil.toPaddedBinary(x, symListA.length);
+		}));
 
 	for (var i = 0; i < symBGray.length; i++) {
 		rowList = [];
@@ -32,24 +35,24 @@ function generateKarnaughMap (symList, truthFunction) {
 	
 			if(flip){
 				_tmp = pbA;
-				pbA = pbB
+				pbA = pbB;
 				pbB = _tmp;
 			}
 
-			binary = pbA.concat(pbB)
+			binary = pbA.concat(pbB);
 
 			f = tfConvert(truthFunction.apply(this, binary));
 			rowList.push(f);
-		};
+		}
 
 		truthTable.push(rowList);
-	};
+	}
 
-	return truthTable
+	return truthTable;
 }
 
 function genKarnaughTable (truthTable, symList, outputTable) {
-	var output = ""
+	var output = "";
 
 	if(flip){
         symListB = symList.slice(0, Math.floor(symList.length/2));
@@ -59,16 +62,16 @@ function genKarnaughTable (truthTable, symList, outputTable) {
         symListB = symList.slice(Math.ceil(symList.length/2));
     }
 
-	output += '<tr><td colspan="2" rowspan="2"></td><td colspan="' + Math.pow(2,symListA.length) + '">' + symListA.join("") + '</td></tr>'
+	output += '<tr><td colspan="2" rowspan="2"></td><td colspan="' + Math.pow(2,symListA.length) + '">' + symListA.join("") + '</td></tr>';
 
 	for (var row = 0; row < truthTable.length; row++) {
 		output += "<tr>";
 		if(1 === row){
-			output += '<td rowspan="' + Math.pow(2,symListB.length) + '">' + symListB.join("") + '</td>'
+			output += '<td rowspan="' + Math.pow(2,symListB.length) + '">' + symListB.join("") + '</td>';
 		}
 		output += genKarnaughTableRow.apply(this,truthTable[row]);
-		output += "</tr>"
-	};
+		output += "</tr>";
+	}
 	outputTable.innerHTML = output;
 }
 
@@ -76,8 +79,8 @@ function genKarnaughTableRow () {
 	tableRowHTML = "";
 	for (var i = 0; i < arguments.length; i++) {
 		tableRowHTML += '<td class="res">' + arguments[i] + "</td>";
-	};
-	return tableRowHTML
+	}
+	return tableRowHTML;
 }
 
 var flip = false;
@@ -85,4 +88,4 @@ var flip = false;
 document.getElementById("flip").addEventListener("change", function(){
 	flip = flip ? false : true;
 	parseAndGenerateTable(inputElement.value);
-})
+});

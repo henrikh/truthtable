@@ -1,4 +1,4 @@
-define(function(){
+define("truthfunction", ["truthTable"], function(truthTable){
 	function and (a, b) {
 		return a && b
 	}
@@ -60,6 +60,10 @@ define(function(){
 		eval("t = function(" + symList.join(",") + "){return " + parsedExpression + "}");
 		return t
 	};
+
+	exports.truthTable = function(symList, f){
+		return truthTable.generate(symList, f);
+	}
 
 	return exports
 });

@@ -24,27 +24,12 @@ function genTableRow () {
 
 // Internals
 
-generateTruthTable = function(inputList, truthFunction) {
-	inputCount = inputList.length;
-
-	truthTableList = [inputList.concat("f")];
-
-	for (var i = 0; i < Math.pow(2, inputCount); i++) {
-		binary = binaryUtil.toPaddedBinaryList(i, inputCount);
-		f = tfConvert(truthFunction.apply(this, binary));
-		binary.push(f);
-		truthTableList.push(binary);
-	};
-
-	return truthTableList
-}
-
 function parseAndGenerateTable(logicExpression) {
 	parsedExpression = parser.parse(logicExpression);
 	symList = truthfunction.symlist(parsedExpression);
 	tf = truthfunction.generate(symList, parsedExpression);
 
-	truthTable = generateTruthTable(symList, tf);
+	truthTable = truthfunction.truthTable(symList, tf);
 	genTable(truthTable, outputTruthTable);
 	
 	karnaughTable = generateKarnaughMap(symList, tf);

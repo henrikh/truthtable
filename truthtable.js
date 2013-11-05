@@ -22,23 +22,6 @@ function genTableRow () {
 	return tableRowHTML + "</tr>"
 }
 
-// LaTeX-output
-
-function genLaTeXTable (truthTable) {
-	output = "\\begin{tabular}\n"
-	for (var row = 0; row < truthTable.length; row++) {
-		output += genLaTeXTableRow.apply(this,truthTable[row]);
-	};
-	output += "\\end{tabular}";
-	return output
-}
-
-function genLaTeXTableRow () {
-	tableRowHTML = "";
-	tableRowHTML += Array.prototype.slice.call(arguments).join(" & ")
-	return tableRowHTML + " \\\\\n"
-}
-
 // Internals
 
 generateTruthTable = function(inputList, truthFunction) {
@@ -67,7 +50,7 @@ function parseAndGenerateTable(logicExpression) {
 	karnaughTable = generateKarnaughMap(symList, tf);
 	genKarnaughTable(karnaughTable, symList, outputKarnaughTable);
 	
-	console.log(genLaTeXTable(truthTable));
+	console.log(LaTeX.generate(truthTable));
 }
 
 var outputTruthTable = document.getElementById("truthtable");

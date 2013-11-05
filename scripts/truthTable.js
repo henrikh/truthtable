@@ -7,8 +7,7 @@ define("truthTable", function(){
 
 		for (var i = 0; i < Math.pow(2, inputCount); i++) {
 			binary = binaryUtil.toPaddedBinaryList(i, inputCount);
-			f = tfConvert(truthFunction.apply(this, binary));
-			binary.push(f);
+			binary.push(truthFunction.apply(this, binary));
 			truthTableList.push(binary);
 		};
 

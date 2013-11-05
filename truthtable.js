@@ -17,7 +17,11 @@ function genTable (truthTable, outputTable) {
 function genTableRow () {
 	tableRowHTML = "<tr>";
 	for (var i = 0; i < arguments.length; i++) {
-		tableRowHTML += "<td>" + arguments[i] + "</td>";
+		item = arguments[i];
+		if(typeof(item) === "boolean"){
+			item = item ? 1 : 0;
+		}
+		tableRowHTML += "<td>" + item + "</td>";
 	};
 	return tableRowHTML + "</tr>"
 }

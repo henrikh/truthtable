@@ -13,8 +13,8 @@ function parseAndGenerateTable(logicExpression) {
 	truthTable = truthfunction.truthTable(symList, tf);
 	view.truthtable.generate(truthTable, outputTruthTable);
 	
-	karnaughMap = karnaugh.generateMap(symList, tf);
-	karnaugh.generateTable(karnaughMap, symList, outputKarnaughTable);
+	karnaughMap = truthfunction.karnaugh(symList, tf);
+	view.karnaugh.generate(karnaughMap, symList, outputKarnaughTable);
 	
 	console.log(LaTeX.generate(truthTable));
 }

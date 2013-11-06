@@ -1,4 +1,4 @@
-define("truthfunction", ["truthTable"], function(truthTable){
+define("truthfunction", ["truthTable", "karnaugh"], function(truthTable, karnuagh){
 	function and (a, b) {
 		return a && b;
 	}
@@ -67,6 +67,10 @@ define("truthfunction", ["truthTable"], function(truthTable){
 	exports.truthTable = function(symList, f){
 		return truthTable.generate(symList, f);
 	};
+
+	exports.karnaugh = function(symList, f){
+		return karnaugh.generateMap(symList, f);
+	}
 
 	return exports;
 });

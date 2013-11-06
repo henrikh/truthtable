@@ -2,6 +2,16 @@ define("util", function(){
 
 	var exports = {};
 
+	exports.sliceSymList = function(symList){
+		if(flip){
+			return [symList.slice(Math.floor(symList.length/2)),
+				symList.slice(0, Math.floor(symList.length/2))];
+		} else {
+			return [symList.slice(0, Math.ceil(symList.length/2)),
+				symList.slice(Math.ceil(symList.length/2))];
+		}
+	}
+
 	exports.toOneZero = function(item) {
 		if(typeof(item) === "boolean"){
 			return item ? 1 : 0;

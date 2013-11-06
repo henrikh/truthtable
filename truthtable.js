@@ -51,3 +51,8 @@ inputElement.addEventListener("keyup", function(){
 	outputKarnaughTable.innerHTML = "";
 	parseAndGenerateTable(inputElement.value);
 });
+
+document.getElementById("flip").addEventListener("change", function(){
+	flip = flip ? false : true;
+	parseAndGenerateTable(inputElement.value);
+});

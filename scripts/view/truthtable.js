@@ -1,11 +1,11 @@
-define("view/truthtable", ["binaryUtil"], function(binaryUtil){
+define("view/truthtable", ["util"], function(util){
 
 var exports = {};
 
 function genTableRow () {
 	tableRowHTML = "<tr>";
 	for (var i = 0; i < arguments.length; i++) {
-		tableRowHTML += "<td>" + binaryUtil.toOneZero(arguments[i]) + "</td>";
+		tableRowHTML += "<td>" + util.toOneZero(arguments[i]) + "</td>";
 	}
 	return tableRowHTML + "</tr>";
 }

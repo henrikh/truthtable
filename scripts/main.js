@@ -1,7 +1,7 @@
-require(["grammar", "binaryUtil", "truthfunction", "LaTeX", "karnaugh", "view/truthtable"],
- function(grammar,   binaryUtil,   truthfunction,   LaTeX,   karnaugh,   truthtableview){
+require(["grammar", "util", "truthfunction", "LaTeX", "karnaugh", "view/truthtable"],
+ function(grammar,   util,   truthfunction,   LaTeX,   karnaugh,   truthtableview){
 	window.parser = grammar;
-	window.binaryUtil = binaryUtil;
+	window.util = util;
 	window.truthfunction = truthfunction;
 	window.LaTeX = LaTeX;
 	window.karnaugh = karnaugh;

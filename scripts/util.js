@@ -1,4 +1,4 @@
-define("binaryUtil", function(){
+define("util", function(){
 
 	var exports = {};
 

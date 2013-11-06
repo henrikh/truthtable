@@ -1,4 +1,4 @@
-define("karnaugh", ["binaryUtil"], function(binaryUtil){
+define("karnaugh", ["util"], function(util){
 function sliceSymList(symList){
 	if(flip){
 		return [symList.slice(Math.floor(symList.length/2)),
@@ -21,24 +21,24 @@ exports.generateMap = function(symList, truthFunction) {
 	symListA = _tmp[0];
 	symListB = _tmp[1];
 
-	symAGray = binaryUtil.grayCode(symListA.length);
-	symBGray = binaryUtil.grayCode(symListB.length);
+	symAGray = util.grayCode(symListA.length);
+	symBGray = util.grayCode(symListB.length);
 
 	truthTable = [];
 	truthTable.push(symAGray.map(
 		function(x){
-			return binaryUtil.toPaddedBinary(x, symListA.length);
+			return util.toPaddedBinary(x, symListA.length);
 		}));
 
 	for (var i = 0; i < symBGray.length; i++) {
 		rowList = [];
-		rowList.push(binaryUtil.toPaddedBinary(symBGray[i], symListB.length));
+		rowList.push(util.toPaddedBinary(symBGray[i], symListB.length));
 		for (var j = 0; j < symAGray.length; j++) {
-			pbA = binaryUtil.toPaddedBinaryList(
+			pbA = util.toPaddedBinaryList(
 				symAGray[j],
 				symListA.length);
 
-			pbB = binaryUtil.toPaddedBinaryList(
+			pbB = util.toPaddedBinaryList(
 				symBGray[i],
 				symListB.length);
 	
@@ -89,7 +89,7 @@ function genKarnaughTableRow () {
 	tableRowHTML = "";
 	for (var i = 0; i < arguments.length; i++) {
 		tableRowHTML += '<td class="res">';
-		tableRowHTML += binaryUtil.toOneZero(arguments[i]);
+		tableRowHTML += util.toOneZero(arguments[i]);
 		tableRowHTML += "</td>";
 	}
 	return tableRowHTML;

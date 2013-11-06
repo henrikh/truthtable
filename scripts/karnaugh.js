@@ -1,3 +1,4 @@
+define("karnaugh", ["binaryUtil"], function(binaryUtil){
 function sliceSymList(symList){
 	if(flip){
 		return [symList.slice(Math.floor(symList.length/2)),
@@ -8,7 +9,9 @@ function sliceSymList(symList){
 	}
 }
 
-function generateKarnaughMap (symList, truthFunction) {
+exports = {};
+
+exports.generateMap = function(symList, truthFunction) {
 	var truthTable;
 	if(symList.length > 4 || symList.length <= 1) {
 		return false;
@@ -55,9 +58,9 @@ function generateKarnaughMap (symList, truthFunction) {
 	}
 
 	return truthTable;
-}
+};
 
-function genKarnaughTable (truthTable, symList, outputTable) {
+exports.generateTable = function(truthTable, symList, outputTable) {
 	var output = "";
 
 	_tmp = sliceSymList(symList);
@@ -80,7 +83,7 @@ function genKarnaughTable (truthTable, symList, outputTable) {
 		output += "</tr>";
 	}
 	outputTable.innerHTML = output;
-}
+};
 
 function genKarnaughTableRow () {
 	tableRowHTML = "";
@@ -92,4 +95,5 @@ function genKarnaughTableRow () {
 	return tableRowHTML;
 }
 
-var flip = false;
+return exports;
+});

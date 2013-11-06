@@ -36,8 +36,8 @@ function parseAndGenerateTable(logicExpression) {
 	truthTable = truthfunction.truthTable(symList, tf);
 	genTable(truthTable, outputTruthTable);
 	
-	karnaughTable = generateKarnaughMap(symList, tf);
-	genKarnaughTable(karnaughTable, symList, outputKarnaughTable);
+	karnaughMap = karnaugh.generateMap(symList, tf);
+	karnaugh.generateTable(karnaughMap, symList, outputKarnaughTable);
 	
 	console.log(LaTeX.generate(truthTable));
 }
@@ -51,6 +51,8 @@ inputElement.addEventListener("keyup", function(){
 	outputKarnaughTable.innerHTML = "";
 	parseAndGenerateTable(inputElement.value);
 });
+
+window.flip = false;
 
 document.getElementById("flip").addEventListener("change", function(){
 	flip = flip ? false : true;

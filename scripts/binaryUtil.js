@@ -2,6 +2,13 @@ define("binaryUtil", function(){
 
 	var exports = {};
 
+	exports.toOneZero = function(item) {
+		if(typeof(item) === "boolean"){
+			return item ? 1 : 0;
+		}
+		return item;
+	};
+
 	exports.toPaddedBinary = function (decimal, width) {
 		binary = decimal.toString(2);
 		while(binary.length < width){

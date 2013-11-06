@@ -1,7 +1,3 @@
-function tfConvert (x) {
-	return x ? 1 : 0;
-}
-
 // HTML-output
 
 // x || y || z || a || b || c || d || e
@@ -17,11 +13,7 @@ function genTable (truthTable, outputTable) {
 function genTableRow () {
 	tableRowHTML = "<tr>";
 	for (var i = 0; i < arguments.length; i++) {
-		item = arguments[i];
-		if(typeof(item) === "boolean"){
-			item = item ? 1 : 0;
-		}
-		tableRowHTML += "<td>" + item + "</td>";
+		tableRowHTML += "<td>" + binaryUtil.toOneZero(arguments[i]) + "</td>";
 	}
 	return tableRowHTML + "</tr>";
 }

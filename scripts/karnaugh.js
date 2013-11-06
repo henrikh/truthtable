@@ -89,7 +89,7 @@ function genKarnaughTableRow () {
 	tableRowHTML = "";
 	for (var i = 0; i < arguments.length; i++) {
 		tableRowHTML += '<td class="res">';
-		tableRowHTML += arguments[i];
+		tableRowHTML += binaryUtil.toOneZero(arguments[i]);
 		tableRowHTML += "</td>";
 	}
 	return tableRowHTML;

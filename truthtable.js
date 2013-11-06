@@ -2,21 +2,6 @@
 
 // x || y || z || a || b || c || d || e
 
-function genTable (truthTable, outputTable) {
-	output = "";
-	for (var row = 0; row < truthTable.length; row++) {
-		output += genTableRow.apply(this,truthTable[row]);
-	}
-	outputTable.innerHTML = output;
-}
-
-function genTableRow () {
-	tableRowHTML = "<tr>";
-	for (var i = 0; i < arguments.length; i++) {
-		tableRowHTML += "<td>" + binaryUtil.toOneZero(arguments[i]) + "</td>";
-	}
-	return tableRowHTML + "</tr>";
-}
 
 // Internals
 
@@ -26,7 +11,7 @@ function parseAndGenerateTable(logicExpression) {
 	tf = truthfunction.generate(symList, parsedExpression);
 
 	truthTable = truthfunction.truthTable(symList, tf);
-	genTable(truthTable, outputTruthTable);
+	view.truthtable.generate(truthTable, outputTruthTable);
 	
 	karnaughMap = karnaugh.generateMap(symList, tf);
 	karnaugh.generateTable(karnaughMap, symList, outputKarnaughTable);

@@ -1,4 +1,4 @@
-define("truthfunction", ["truthTable", "karnaugh"], function(truthTable, karnuagh){
+define("truthfunction", ["truthTable", "karnaugh"], function(truthTable, karnaugh){
 	function and (a, b) {
 		return a && b;
 	}

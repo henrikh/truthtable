@@ -15,7 +15,7 @@ Opening index.html in a webbrowser should do.
 Grammar for parser
 ------------------
 
-PEG.js is used for parser generation. The grammar is in `grammar.mdown`.
+PEG.js is used for parser generation. The grammar is in `parser/grammar.pegjs`.
 
 License
 -------

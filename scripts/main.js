@@ -1,5 +1,5 @@
-require(["grammar", "truthfunction", "LaTeX", "karnaugh", "view/truthtable", "view/karnaugh"],
- function(parser,    truthfunction,   LaTeX,   karnaugh,   truthtableview,    karnaughview){
+require(["grammar", "truthfunction", "LaTeX", "karnaugh", "view/truthtable", "view/karnaugh", "storage"],
+ function(parser,    truthfunction,   LaTeX,   karnaugh,   truthtableview,    karnaughview, storage){
 window.view = {};
 view.truthtable = truthtableview;
 view.karnaugh = karnaughview;
@@ -28,10 +28,12 @@ inputElement.addEventListener("keyup", function(){
 	parseAndGenerateTable(inputElement.value);
 });
 
-window.flip = false;
+var flipEl = document.getElementById("flip");
+window.flip = flipEl.checked = storage.get("flip") ? true : false;
 
-document.getElementById("flip").addEventListener("change", function(e){
-	flip = e.target.checked;
+flipEl.addEventListener("change", function(){
+	flip = flipEl.checked;
+	storage.set("flip", flip);
 	parseAndGenerateTable(inputElement.value);
 });
 });

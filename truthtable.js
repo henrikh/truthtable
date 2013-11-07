@@ -31,7 +31,7 @@ inputElement.addEventListener("keyup", function(){
 
 window.flip = false;
 
-document.getElementById("flip").addEventListener("change", function(){
-	flip = flip ? false : true;
+document.getElementById("flip").addEventListener("change", function(e){
+	flip = e.target.checked;
 	parseAndGenerateTable(inputElement.value);
 });

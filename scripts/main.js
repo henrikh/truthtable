@@ -1,5 +1,5 @@
-require(["grammar", "truthfunction", "LaTeX", "karnaugh", "view/truthtable", "view/karnaugh", "storage"],
- function(parser,    truthfunction,   LaTeX,   karnaugh,   truthtableview,    karnaughview, storage){
+require(["grammar", "truthfunction", "LaTeX", "karnaugh", "view/truthtable", "view/karnaugh", "storage", "history"],
+ function(parser,    truthfunction,   LaTeX,   karnaugh,   truthtableview,    karnaughview,    storage,   history){
 window.view = {};
 view.truthtable = truthtableview;
 view.karnaugh = karnaughview;
@@ -36,4 +36,6 @@ flipEl.addEventListener("change", function(){
 	storage.set("flip", flip);
 	parseAndGenerateTable(inputElement.value);
 });
+
+history.saveStateOf(inputElement);
 });

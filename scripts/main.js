@@ -37,5 +37,5 @@ flipEl.addEventListener("change", function(){
 	parseAndGenerateTable(inputElement.value);
 });
 
-history.saveStateOf(inputElement);
+history.saveStateOf(inputElement, document.querySelector("#history ul"));
 });

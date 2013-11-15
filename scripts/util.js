@@ -10,7 +10,7 @@ define("util", function(){
 			return [symList.slice(0, Math.ceil(symList.length/2)),
 				symList.slice(Math.ceil(symList.length/2))];
 		}
-	}
+	};
 
 	exports.toOneZero = function(item) {
 		if(typeof(item) === "boolean"){

@@ -70,7 +70,7 @@ define("truthfunction", ["truthTable", "karnaugh"], function(truthTable, karnaug
 
 	exports.karnaugh = function(symList, f){
 		return karnaugh.generateMap(symList, f);
-	}
+	};
 
 	return exports;
 });

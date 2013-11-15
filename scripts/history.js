@@ -16,7 +16,7 @@ function render(){
 	for(var i=0; i < history.length; i++){
 		output += "<li>" + history[i] + "</li>";
 	}
-	outputElement.innerHTML = output
+	outputElement.innerHTML = output;
 }
 
 function save(value){

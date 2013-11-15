@@ -1,4 +1,4 @@
-define("truthfunction", ["truthTable", "karnaugh"], function(truthTable, karnaugh){
+define("truthfunction", ["truthTable", "karnaugh", "util"], function(truthTable, karnaugh, util){
 	function and (a, b) {
 		return a && b;
 	}
@@ -62,6 +62,20 @@ define("truthfunction", ["truthTable", "karnaugh"], function(truthTable, karnaug
 	exports.generate = function(symList, parsedExpression) {
 		eval("t = function(" + symList.join(",") + "){return " + parsedExpression + "}");
 		return t;
+	};
+
+	exports.minterms = function(symList, f){
+		var inputCount = symList.length;		
+
+		var minterms = [];
+
+		for (var i = 0; i < Math.pow(2, inputCount); i++) {
+			binary = util.toPaddedBinaryList(i, inputCount);
+			if(f.apply(this, binary)){
+				minterms.push(i);
+			}
+		}
+		return minterms;
 	};
 
 	exports.truthTable = function(symList, f){

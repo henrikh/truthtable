@@ -1,4 +1,4 @@
-define("truthfunction", ["truthTable", "karnaugh"], function(truthTable, karnaugh){
+define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 	function and (a, b) {
 		return a && b;
 	}
@@ -64,8 +64,48 @@ define("truthfunction", ["truthTable", "karnaugh"], function(truthTable, karnaug
 		return t;
 	};
 
+	exports.minterms = function(symList, f){
+		var inputCount = symList.length;		
+
+		var minterms = [];
+
+		for (var i = 0; i < Math.pow(2, inputCount); i++) {
+			var binary = util.toPaddedBinaryList(i, inputCount);
+			if(f.apply(this, binary)){
+				minterms.push(i);
+			}
+		}
+		return minterms;
+	};
+
+	function resultList(symListLength, minterms){
+		var list = [];
+		for (var i = 0; i < Math.pow(2, symListLength); i++){
+			list.push(0);
+		}
+		for (var i = 0; i < minterms.length; i++){
+			list[minterms[i]] = 1;
+		}
+
+		return list;
+	}
+
 	exports.truthTable = function(symList, f){
-		return truthTable.generate(symList, f);
+		var inputCount = symList.length;
+
+		var minterms = exports.minterms(symList, f);
+
+		var list = resultList(inputCount, minterms);
+
+		var truthTableList = [symList.concat("f")];
+
+		for (var i = 0; i < list.length; i++) {
+			var binary = util.toPaddedBinaryList(i, inputCount);
+			binary.push(list[i]);
+			truthTableList.push(binary);
+		}
+
+		return truthTableList;
 	};
 
 	exports.karnaugh = function(symList, f){

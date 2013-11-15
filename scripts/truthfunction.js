@@ -64,7 +64,7 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		return t;
 	};
 
-	exports.minterms = function(symList, f){
+	var minterms = function(symList, f){
 		var inputCount = symList.length;		
 
 		var minterms = [];
@@ -77,6 +77,8 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		}
 		return minterms;
 	};
+
+	exports.minterms = minterms;
 
 	function resultList(symListLength, minterms){
 		var list = [];
@@ -93,9 +95,7 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 	exports.truthTable = function(symList, f){
 		var inputCount = symList.length;
 
-		var minterms = exports.minterms(symList, f);
-
-		var list = resultList(inputCount, minterms);
+		var list = resultList(inputCount, minterms(symList, f));
 
 		var truthTableList = [symList.concat("f")];
 

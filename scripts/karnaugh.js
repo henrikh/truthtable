@@ -1,9 +1,10 @@
 define("karnaugh", ["util"], function(util){
+'use strict';
 
-exports = {};
+var exports = {};
 
 exports.generateMap = function(symList, truthFunction) {
-	var truthTable;
+	var truthTable, _tmp, symListA, symListB, symAGray, symBGray;
 	if(symList.length > 4 || symList.length <= 1) {
 		return false;
 	}
@@ -22,9 +23,10 @@ exports.generateMap = function(symList, truthFunction) {
 		}));
 
 	for (var i = 0; i < symBGray.length; i++) {
-		rowList = [];
+		var rowList = [];
 		rowList.push(util.toPaddedBinary(symBGray[i], symListB.length));
 		for (var j = 0; j < symAGray.length; j++) {
+			var pbA, pbB, binary, f;
 			pbA = util.toPaddedBinaryList(
 				symAGray[j],
 				symListA.length);

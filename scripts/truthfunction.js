@@ -1,4 +1,6 @@
 define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
+	'use strict';
+
 	function and (a, b) {
 		return a && b;
 	}
@@ -35,16 +37,16 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 			});
 	}
 
-	exports = {};
+	var exports = {};
 
 	exports.symlist = function(parsedExpression) {
-		regex = /[a-zA-Z]/;
-		parsedExpression = (parsedExpression+" ").split("");
-		stack = [];
-		symList = [];
+		var regex = /[a-zA-Z]/,
+		    parsedExpression = (parsedExpression+" ").split(""),
+		    stack = [],
+		    symList = [];
 
 		for (var i = 0; i < parsedExpression.length; i++) {
-			ch = parsedExpression[i];
+			var ch = parsedExpression[i];
 			if(regex.test(ch)) {
 				stack.push(ch);
 			} else {
@@ -60,7 +62,14 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 	};
 
 	exports.generate = function(symList, parsedExpression) {
-		eval("t = function(" + symList.join(",") + "){return " + parsedExpression + "}");
+		var t;
+		eval("t = function("
+		   + symList.join(",")
+		   + "){var "
+		   + symList.join("m")
+		   + ";return "
+		   + parsedExpression
+		   + "}");
 		return t;
 	};
 

@@ -1,4 +1,5 @@
 define("history", ["storage"], function(storage){
+'use strict';
 
 var exports = {};
 var _tmp = storage.get("history");

@@ -1,4 +1,5 @@
 define("util", function(){
+	'use strict';
 
 	var exports = {};
 
@@ -20,7 +21,7 @@ define("util", function(){
 	};
 
 	exports.toPaddedBinary = function (decimal, width) {
-		binary = decimal.toString(2);
+		var binary = decimal.toString(2);
 		while(binary.length < width){
 			binary = "0" + binary;
 		}
@@ -48,7 +49,7 @@ define("util", function(){
 	};
 
 	exports.grayCode = function(n) {
-		list = [];
+		var list = [];
 		for (var i = 0; i < Math.pow(2,n); i++) {
 			list.push(i);
 		}

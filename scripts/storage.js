@@ -1,4 +1,5 @@
 define("storage", function(){
+'use strict';
 
 var exports = {};
 

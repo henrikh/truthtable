@@ -7,8 +7,11 @@ scripts/parser.js :
 build/main.js : scripts/*.js
 	node r.js -o build.js
 
-build/require.js :
+build/require.js : bower_components/
 	uglifyjs bower_components/requirejs/require.js -o build/require.js
+
+bower_components/ :
+	bower install
 
 server:
 	python -m http.server 8080

@@ -1,9 +1,10 @@
 define("view/truthtable", ["util"], function(util){
+'use strict';
 
 var exports = {};
 
 function genTableRow () {
-	tableRowHTML = "<tr>";
+	var tableRowHTML = "<tr>";
 	for (var i = 0; i < arguments.length; i++) {
 		tableRowHTML += "<td>" + util.toOneZero(arguments[i]) + "</td>";
 	}
@@ -11,7 +12,7 @@ function genTableRow () {
 }
 
 exports.generate = function(truthTable, outputTable) {
-	output = "";
+	var output = "";
 	for (var row = 0; row < truthTable.length; row++) {
 		output += genTableRow.apply(this,truthTable[row]);
 	}

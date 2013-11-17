@@ -1,9 +1,10 @@
 define("view/karnaugh", ["util"], function(util){
+'use strict';
 
 var exports = {};
 
 exports.generate = function(truthTable, symList, outputTable) {
-	var output = "";
+	var output = "", _tmp, symListA, symListB;
 
 	_tmp = util.sliceSymList(symList);
 	symListA = _tmp[0];
@@ -28,7 +29,7 @@ exports.generate = function(truthTable, symList, outputTable) {
 };
 
 function genKarnaughTableRow () {
-	tableRowHTML = "";
+	var tableRowHTML = "";
 	for (var i = 0; i < arguments.length; i++) {
 		tableRowHTML += '<td class="res">';
 		tableRowHTML += util.toOneZero(arguments[i]);

@@ -11,7 +11,7 @@ build/main.js :
 	node r.js -o build.js
 
 build/require.js :
-	cp scripts/require.js build/
+	cp bower_components/requirejs/require.js build/
 
 server:
 	python -m http.server 8080

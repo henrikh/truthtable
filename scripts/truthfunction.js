@@ -66,7 +66,7 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		eval("t = function("
 		   + symList.join(",")
 		   + "){var "
-		   + symList.join("m")
+		   + symList.join(",")
 		   + ";return "
 		   + parsedExpression
 		   + "}");

@@ -7,14 +7,13 @@ view.karnaugh = karnaughview;
 
 function parseAndGenerateTable(logicExpression) {
 	var parsedExpression = parser.parse(logicExpression),
-	    symList = truthfunction.symlist(parsedExpression),
-	    tf = truthfunction.generate(symList, parsedExpression);
+	    TruthFunction = new truthfunction.Constructor(parsedExpression);
 
-	var truthTable = truthfunction.truthTable(symList, tf);
+	var truthTable = TruthFunction.truthTable();
 	view.truthtable.generate(truthTable, outputTruthTable);
 
-	var karnaughMap = truthfunction.karnaugh(symList, tf);
-	view.karnaugh.generate(karnaughMap, symList, outputKarnaughTable);
+	var karnaughMap = TruthFunction.karnaugh();
+	view.karnaugh.generate(karnaughMap, TruthFunction.symlist(), outputKarnaughTable);
 
 	console.log(LaTeX.generate(truthTable));
 }

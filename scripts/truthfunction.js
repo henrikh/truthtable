@@ -39,9 +39,14 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 
 	var exports = {};
 
-	exports.symlist = function(parsedExpression) {
+	exports.Constructor = function(expression){
+		this.expression = expression;
+		this.generate();
+	}
+
+	exports.Constructor.prototype.symlist = function() {
 		var regex = /[a-zA-Z]/,
-		    parsedExpression = (parsedExpression+" ").split(""),
+		    parsedExpression = (this.expression+" ").split(""),
 		    stack = [],
 		    symList = [];
 
@@ -61,33 +66,35 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		return unique(symList).sort();
 	};
 
-	exports.generate = function(symList, parsedExpression) {
-		var t;
+	exports.Constructor.prototype.generate = function() {
+		var t,
+		    symList = this.symlist();
 		eval("t = function("
 		   + symList.join(",")
 		   + "){var "
 		   + symList.join(",")
 		   + ";return "
-		   + parsedExpression
+		   + this.expression
 		   + "}");
+
+		this.func = t;
+
 		return t;
 	};
 
-	var minterms = function(symList, f){
-		var inputCount = symList.length;		
+	exports.Constructor.prototype.minterms = function(){
+		var inputCount = this.symlist().length;
 
 		var minterms = [];
 
 		for (var i = 0; i < Math.pow(2, inputCount); i++) {
 			var binary = util.toPaddedBinaryList(i, inputCount);
-			if(f.apply(this, binary)){
+			if(this.func.apply(this, binary)){
 				minterms.push(i);
 			}
 		}
 		return minterms;
 	};
-
-	exports.minterms = minterms;
 
 	function resultList(symListLength, minterms){
 		var list = [];
@@ -101,12 +108,12 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		return list;
 	}
 
-	exports.truthTable = function(symList, f){
-		var inputCount = symList.length;
+	exports.Constructor.prototype.truthTable = function(){
+		var inputCount = this.symlist().length;
 
-		var list = resultList(inputCount, minterms(symList, f));
+		var list = resultList(inputCount, this.minterms());
 
-		var truthTableList = [symList.concat("f")];
+		var truthTableList = [this.symlist().concat("f")];
 
 		for (var i = 0; i < list.length; i++) {
 			var binary = util.toPaddedBinaryList(i, inputCount);
@@ -117,8 +124,8 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		return truthTableList;
 	};
 
-	exports.karnaugh = function(symList, f){
-		return karnaugh.generateMap(symList, f);
+	exports.Constructor.prototype.karnaugh = function(){
+		return karnaugh.generateMap(this.symlist(), this.func);
 	};
 
 	return exports;

@@ -11,10 +11,11 @@ function genTableRow () {
 	return tableRowHTML + "</tr>";
 }
 
-exports.generate = function(truthTable, outputTable) {
-	var output = "";
-	for (var row = 0; row < truthTable.length; row++) {
-		output += genTableRow.apply(this,truthTable[row]);
+exports.generate = function(truthfunction, outputTable) {
+	var output = "",
+	    truthtable = truthfunction.truthTable();
+	for (var row = 0; row < truthtable.length; row++) {
+		output += genTableRow.apply(this,truthtable[row]);
 	}
 	outputTable.innerHTML = output;
 };

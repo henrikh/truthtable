@@ -9,13 +9,11 @@ function parseAndGenerateTable(logicExpression) {
 	var parsedExpression = parser.parse(logicExpression),
 	    TruthFunction = new truthfunction.Constructor(parsedExpression);
 
-	var truthTable = TruthFunction.truthTable();
-	view.truthtable.generate(truthTable, outputTruthTable);
+	view.truthtable.generate(TruthFunction, outputTruthTable);
 
-	var karnaughMap = TruthFunction.karnaugh();
-	view.karnaugh.generate(karnaughMap, TruthFunction.symlist(), outputKarnaughTable);
+	view.karnaugh.generate(TruthFunction, outputKarnaughTable);
 
-	console.log(LaTeX.generate(truthTable));
+	console.log(LaTeX.generate(TruthFunction.truthTable()));
 }
 
 var outputTruthTable = document.getElementById("truthtable");

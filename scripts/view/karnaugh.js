@@ -3,8 +3,10 @@ define("view/karnaugh", ["util"], function(util){
 
 var exports = {};
 
-exports.generate = function(truthTable, symList, outputTable) {
-	var output = "", _tmp, symListA, symListB;
+exports.generate = function(truthfunction, outputTable) {
+	var output = "", _tmp, symListA, symListB,
+	    karnaughmap = truthfunction.karnaugh(),
+	    symList = truthfunction.symlist();
 
 	_tmp = util.sliceSymList(symList);
 	symListA = _tmp[0];
@@ -15,14 +17,14 @@ exports.generate = function(truthTable, symList, outputTable) {
 	output += symListA.join("");
 	output += '</td></tr>';
 
-	for (var row = 0; row < truthTable.length; row++) {
+	for (var row = 0; row < karnaughmap.length; row++) {
 		output += "<tr>";
 		if(1 === row){
 			output += '<td rowspan="' + Math.pow(2,symListB.length) + '">';
 			output += symListB.join("");
 			output += '</td>';
 		}
-		output += genKarnaughTableRow.apply(this, truthTable[row]);
+		output += genKarnaughTableRow.apply(this, karnaughmap[row]);
 		output += "</tr>";
 	}
 	outputTable.innerHTML = output;

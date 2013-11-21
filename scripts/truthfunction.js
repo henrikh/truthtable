@@ -41,10 +41,13 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 
 	exports.Constructor = function(expression){
 		this.expression = expression;
+		this.cache = {};
 		this.generate();
 	}
 
 	exports.Constructor.prototype.symlist = function() {
+		if(typeof this.cache.symlist !== "undefined" && this.cache.symlist !== null) return this.cache.symlist;
+
 		var regex = /[a-zA-Z]/,
 		    parsedExpression = (this.expression+" ").split(""),
 		    stack = [],
@@ -63,10 +66,13 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 			}
 		}
 
-		return unique(symList).sort();
+		this.cache.symlist = unique(symList).sort();
+		return this.cache.symlist;
 	};
 
 	exports.Constructor.prototype.generate = function() {
+		if(typeof this.cache.func !== "undefined" && this.cache.func !== null) return this.cache.func;
+
 		var t,
 		    symList = this.symlist();
 		eval("t = function("
@@ -77,22 +83,27 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		   + this.expression
 		   + "}");
 
-		this.func = t;
+		this.cache.func = t;
 
 		return t;
 	};
 
+	exports.Constructor.prototype.func = exports.Constructor.prototype.generate;
+
 	exports.Constructor.prototype.minterms = function(){
+		if(typeof this.cache.minterms !== "undefined" && this.cache.minters !== null) return this.cache.minterms;
 		var inputCount = this.symlist().length;
 
 		var minterms = [];
 
 		for (var i = 0; i < Math.pow(2, inputCount); i++) {
 			var binary = util.toPaddedBinaryList(i, inputCount);
-			if(this.func.apply(this, binary)){
+			if(this.func().apply(this, binary)){
 				minterms.push(i);
 			}
 		}
+
+		this.cache.minterms = minterms;
 		return minterms;
 	};
 
@@ -125,7 +136,7 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 	};
 
 	exports.Constructor.prototype.karnaugh = function(){
-		return karnaugh.generateMap(this.symlist(), this.func);
+		return karnaugh.generateMap(this.symlist(), this.func());
 	};
 
 	return exports;

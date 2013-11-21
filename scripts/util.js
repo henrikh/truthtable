@@ -13,6 +13,14 @@ define("util", function(){
 		}
 	};
 
+	exports.times = function(i, item) {
+		var val = [];
+		for(i; i>0; --i) {
+			val.push(item);
+		}
+		return val;
+	};
+
 	exports.toOneZero = function(item) {
 		if(typeof(item) === "boolean"){
 			return item ? 1 : 0;

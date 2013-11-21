@@ -1,18 +1,17 @@
-define("LaTeX", function(){
+define("LaTeX", ["util"], function(util){
 	'use strict';
-	var genLaTeXTableRow = function() {
-		var tableRowHTML = "";
-		tableRowHTML += Array.prototype.slice.call(arguments).join(" & ");
-		return tableRowHTML + " \\\\\n";
-	};
 
 	var exports = {
 		generate: function (truthTable) {
-			var output = "\\begin{tabular}\n";
-			for (var row = 0; row < truthTable.length; row++) {
-				output += genLaTeXTableRow.apply(this,truthTable[row]);
-			}
-			output += "\\end{tabular}";
+			var tt = truthTable.map(function(list){
+				return list.join(" & ");
+			});
+			var output = "\\begin{tabular}"
+			           + "{"
+			           + util.times(truthTable[0].length, "c").join(" ")
+			           + "}\n"
+			           + tt.join(" \\\\\n")
+			           + "\n\\end{tabular}";
 			return output;
 		}
 	};

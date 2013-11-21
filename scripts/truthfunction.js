@@ -43,7 +43,7 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		this.expression = expression;
 		this.cache = {};
 		this.generate();
-	}
+	};
 
 	exports.Constructor.prototype.symlist = function() {
 		if(typeof this.cache.symlist !== "undefined" && this.cache.symlist !== null) return this.cache.symlist;
@@ -92,9 +92,8 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 
 	exports.Constructor.prototype.minterms = function(){
 		if(typeof this.cache.minterms !== "undefined" && this.cache.minters !== null) return this.cache.minterms;
-		var inputCount = this.symlist().length;
-
-		var minterms = [];
+		var inputCount = this.symlist().length,
+		    minterms = [];
 
 		for (var i = 0; i < Math.pow(2, inputCount); i++) {
 			var binary = util.toPaddedBinaryList(i, inputCount);

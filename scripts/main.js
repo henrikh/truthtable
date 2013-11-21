@@ -1,5 +1,5 @@
-require(["grammar", "truthfunction", "LaTeX", "karnaugh", "view/truthtable", "view/karnaugh", "storage", "history"],
- function(parser,    truthfunction,   LaTeX,   karnaugh,   truthtableview,    karnaughview,    storage,   history){
+require(["grammar", "truthfunction", "LaTeX", "view/truthtable", "view/karnaugh", "storage", "history"],
+ function(parser,    truthfunction,   LaTeX,   truthtableview,    karnaughview,    storage,   history){
 'use strict';
 window.view = {};
 view.truthtable = truthtableview;

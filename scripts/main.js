@@ -5,9 +5,12 @@ window.view = {};
 view.truthtable = truthtableview;
 view.karnaugh = karnaughview;
 
+var TruthFunction = new truthfunction.Constructor();
+
 function parseAndGenerateTable(logicExpression) {
-	var parsedExpression = parser.parse(logicExpression),
-	    TruthFunction = new truthfunction.Constructor(parsedExpression);
+	var parsedExpression = parser.parse(logicExpression);
+
+	TruthFunction.setExp(parsedExpression);
 
 	view.truthtable.generate(TruthFunction, outputTruthTable);
 

@@ -39,10 +39,13 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 
 	var exports = {};
 
-	exports.Constructor = function(expression){
+	exports.Constructor = function(){
+		this.cache = {};
+	};
+
+	exports.Constructor.prototype.setExp = function(expression) {
 		this.expression = expression;
 		this.cache = {};
-		this.generate();
 	};
 
 	exports.Constructor.prototype.symlist = function() {

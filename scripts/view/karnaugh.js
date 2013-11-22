@@ -4,8 +4,13 @@ define("view/karnaugh", ["util"], function(util){
 var exports = {};
 
 exports.generate = function(truthfunction, outputTable) {
+	var karnaughmap = truthfunction.karnaugh();
+	if(karnaughmap === false) {
+		outputTable.innerHTML = "";
+		return false;
+	}
+
 	var output = "", _tmp, symListA, symListB,
-	    karnaughmap = truthfunction.karnaugh(),
 	    symList = truthfunction.symlist();
 
 	_tmp = util.sliceSymList(symList);

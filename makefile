@@ -4,7 +4,7 @@ scripts/parser.js : parser/parser.pegjs
 	node_modules/pegjs/bin/pegjs parser/parser.pegjs
 	node r.js -convert parser/ scripts/
 
-build/main.js : scripts/*.js
+build/main.js : scripts/*.js scripts/view/*.js
 	node r.js -o build.js
 
 build/require.js : bower_components/

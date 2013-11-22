@@ -38,14 +38,17 @@ or
  / s* "+"    s*
 
 symset
- = sym:symbol symset:symset {return sym + "&&" + symset}
+ = sym:symbol symset:symset {return "and(" + sym + "," + symset + ")"}
  / symbol
 
 symbol
  = not "(" space* sym:symbol space* ")" {return "(!" + sym + ")"}
  / "(" not space+ sym:symbol ")" {return "(!" + sym + ")"}
  / "!" sym:symbol {return "(!" + sym + ")"}
- / [a-zA-Z]
+ / sym:([a-zA-Z] subdigit?) {return sym.join("")}
+
+subdigit
+ = us:"_"? digits:[0-9]+ {return us + digits.join("")}
 
 not
  = "not"

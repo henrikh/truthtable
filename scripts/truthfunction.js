@@ -50,25 +50,14 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 	Constructor.prototype.symlist = function() {
 		if(typeof this.cache.symlist !== "undefined" && this.cache.symlist !== null) return this.cache.symlist;
 
-		var regex = /[a-zA-Z]/,
-		    parsedExpression = (this.expression+" ").split(""),
-		    stack = [],
-		    symList = [];
+		var regex = /[a-zA-Z](?:_?\d+)?[,)]/g;
 
-		for (var i = 0; i < parsedExpression.length; i++) {
-			var ch = parsedExpression[i];
-			if(regex.test(ch)) {
-				stack.push(ch);
-			} else {
-				if(stack.length === 1) {
-					symList.push(stack[0]);
-				}
-				stack = [];
-				continue;
-			}
-		}
+		var symlist = this.expression.match(regex).map(
+			function(i){
+				return i.slice(0,i.length-1);
+			});
 
-		this.cache.symlist = unique(symList).sort();
+		this.cache.symlist = unique(symlist).sort();
 		return this.cache.symlist;
 	};
 

@@ -1,4 +1,4 @@
-require(["grammar", "truthfunction", "LaTeX", "view/truthtable", "view/karnaugh", "storage", "history"],
+require(["parser", "truthfunction", "LaTeX", "view/truthtable", "view/karnaugh", "storage", "history"],
  function(parser,    truthfunction,   LaTeX,   truthtableview,    karnaughview,    storage,   history){
 'use strict';
 window.view = {};

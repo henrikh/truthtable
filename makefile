@@ -1,6 +1,6 @@
 install : build/main.js build/require.js scripts/parser.js
 
-scripts/parser.js :
+scripts/parser.js : parser/parser.pegjs
 	node_modules/pegjs/bin/pegjs parser/parser.pegjs
 	node r.js -convert parser/ scripts/
 

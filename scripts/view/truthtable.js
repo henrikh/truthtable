@@ -1,4 +1,4 @@
-define("view/truthtable", ["util"], function(util){
+define("view/truthtable", ["util", "view/util"], function(util, viewUtil){
 'use strict';
 
 var exports = {};
@@ -6,7 +6,14 @@ var exports = {};
 function genTableRow () {
 	var tableRowHTML = "<tr>";
 	for (var i = 0; i < arguments.length; i++) {
-		tableRowHTML += "<td>" + util.toOneZero(arguments[i]) + "</td>";
+		tableRowHTML += "<td>";
+		var argtype = typeof arguments[i];
+		if(argtype === "string") {
+			tableRowHTML += viewUtil.formatSymbol(arguments[i]);
+		} else {
+			tableRowHTML += util.toOneZero(arguments[i]);
+		}
+		tableRowHTML += "</td>";
 	}
 	return tableRowHTML + "</tr>";
 }

@@ -1,4 +1,4 @@
-define("view/karnaugh", ["util"], function(util){
+define("view/karnaugh", ["util", "view/util"], function(util, viewUtil){
 'use strict';
 
 var exports = {};
@@ -14,8 +14,8 @@ exports.generate = function(truthfunction, outputTable) {
 	    symList = truthfunction.symlist();
 
 	_tmp = util.sliceSymList(symList);
-	symListA = _tmp[0];
-	symListB = _tmp[1];
+	symListA = _tmp[0].map(viewUtil.formatSymbol);
+	symListB = _tmp[1].map(viewUtil.formatSymbol);
 
 	output += '<tr><td colspan="2" rowspan="2">';
 	output += '</td><td colspan="' + Math.pow(2,symListA.length) + '">';

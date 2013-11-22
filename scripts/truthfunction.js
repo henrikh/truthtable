@@ -37,18 +37,17 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 			});
 	}
 
-	var exports = {};
-
-	exports.Constructor = function(){
+	var exports = {},
+	    Constructor = function(){
 		this.cache = {};
 	};
 
-	exports.Constructor.prototype.setExp = function(expression) {
+	Constructor.prototype.setExp = function(expression) {
 		this.expression = expression;
 		this.cache = {};
 	};
 
-	exports.Constructor.prototype.symlist = function() {
+	Constructor.prototype.symlist = function() {
 		if(typeof this.cache.symlist !== "undefined" && this.cache.symlist !== null) return this.cache.symlist;
 
 		var regex = /[a-zA-Z]/,
@@ -73,7 +72,7 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		return this.cache.symlist;
 	};
 
-	exports.Constructor.prototype.generate = function() {
+	Constructor.prototype.generate = function() {
 		if(typeof this.cache.func !== "undefined" && this.cache.func !== null) return this.cache.func;
 
 		var t,
@@ -91,9 +90,9 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		return t;
 	};
 
-	exports.Constructor.prototype.func = exports.Constructor.prototype.generate;
+	Constructor.prototype.func = Constructor.prototype.generate;
 
-	exports.Constructor.prototype.minterms = function(){
+	Constructor.prototype.minterms = function(){
 		if(typeof this.cache.minterms !== "undefined" && this.cache.minters !== null) return this.cache.minterms;
 		var inputCount = this.symlist().length,
 		    minterms = [];
@@ -121,7 +120,7 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		return list;
 	}
 
-	exports.Constructor.prototype.truthTable = function(){
+	Constructor.prototype.truthTable = function(){
 		var inputCount = this.symlist().length;
 
 		var list = resultList(inputCount, this.minterms());
@@ -137,9 +136,11 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 		return truthTableList;
 	};
 
-	exports.Constructor.prototype.karnaugh = function(){
+	Constructor.prototype.karnaugh = function(){
 		return karnaugh.generateMap(this.symlist(), this.func());
 	};
+
+	exports.Constructor = Constructor;
 
 	return exports;
 });

@@ -19,6 +19,15 @@ function parseAndGenerateTable(logicExpression) {
 	console.log(LaTeX.generate(TruthFunction.truthTable()));
 }
 
+var flipEl = document.getElementById("flip");
+window.flip = flipEl.checked = storage.get("flip") ? true : false;
+
+flipEl.addEventListener("change", function(){
+	flip = flipEl.checked;
+	storage.set("flip", flip);
+	parseAndGenerateTable(inputElement.value);
+});
+
 var outputTruthTable = document.getElementById("truthtable");
 var outputKarnaughTable = document.getElementById("karnaughtable");
 
@@ -36,15 +45,6 @@ inputElement.addEventListener("keyup", function(){
 	outputKarnaughTable.innerHTML = "";
 	parseAndGenerateTable(inputElement.value);
 	permaLink.href = "#" + encodeURIComponent(inputElement.value);
-});
-
-var flipEl = document.getElementById("flip");
-window.flip = flipEl.checked = storage.get("flip") ? true : false;
-
-flipEl.addEventListener("change", function(){
-	flip = flipEl.checked;
-	storage.set("flip", flip);
-	parseAndGenerateTable(inputElement.value);
 });
 
 history.saveStateOf(inputElement, document.querySelector("#history ul"));

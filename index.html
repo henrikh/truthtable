@@ -67,12 +67,23 @@ body {
 	margin: 0;
 }
 
+#permaLink {
+	color: #48F;
+	text-decoration: initial;
+}
+
+#permaLink:visited {
+	color: #48F;
+}
+
 </style>
 <script data-main="build/main" src="build/require.js"></script>
 </head>
 <body>
 
 <div id="inputDiv"><input type="text" id="expressionInput" autofocus="autofocus" /><input type="checkbox" id="flip" name="flip"/><label for="flip">Flip MSB and LSB?</label></div>
+
+<p><a id="permaLink" href="">Perma link</a></p>
 
 <p style="color:grey;font-style:italic;">Ex. ab + (c and (a xor b)) <p>
 

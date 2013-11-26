@@ -22,11 +22,20 @@ function parseAndGenerateTable(logicExpression) {
 var outputTruthTable = document.getElementById("truthtable");
 var outputKarnaughTable = document.getElementById("karnaughtable");
 
-var inputElement = document.getElementById("expressionInput");
+var inputElement = document.getElementById("expressionInput"),
+    permaLink = document.getElementById("permaLink");
+
+if(location.hash !== "") {
+	var expression = decodeURIComponent(location.hash.slice(1));
+	inputElement.value = expression;
+	parseAndGenerateTable(expression);
+}
+
 inputElement.addEventListener("keyup", function(){
 	outputTruthTable.innerHTML = "";
 	outputKarnaughTable.innerHTML = "";
 	parseAndGenerateTable(inputElement.value);
+	permaLink.href = "#" + encodeURIComponent(inputElement.value);
 });
 
 var flipEl = document.getElementById("flip");

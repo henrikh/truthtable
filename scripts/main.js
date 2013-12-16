@@ -16,6 +16,8 @@ function parseAndGenerateTable(logicExpression) {
 
 	view.karnaugh.generate(TruthFunction, outputKarnaughTable);
 
+	console.log(TruthFunction.minimize());
+
 	console.log(LaTeX.generate(TruthFunction.truthTable()));
 }
 

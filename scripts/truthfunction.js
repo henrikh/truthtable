@@ -1,4 +1,4 @@
-define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
+define("truthfunction", ["karnaugh", "QM", "util"], function(karnaugh, QM, util){
 	'use strict';
 
 	function and (a, b) {
@@ -127,6 +127,10 @@ define("truthfunction", ["karnaugh", "util"], function(karnaugh, util){
 
 	Constructor.prototype.karnaugh = function(){
 		return karnaugh.generateMap(this.symlist(), this.func());
+	};
+
+	Constructor.prototype.minimize = function(){
+		return QM.minimize(this);
 	};
 
 	exports.Constructor = Constructor;

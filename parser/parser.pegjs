@@ -7,8 +7,8 @@ group
 
 paren
  = "(" space* group:group space* ")" {return "(" + group + ")"}
- / "!" paren:paren {return "!" + paren}
- / not paren:paren {return "!" + paren}
+ / "!" "(" space* group:group space* ")" {return "!(" + group + ")"}
+ / not "(" space* group:group space* ")" {return "!(" + group + ")"}
  / symset
 
 operator

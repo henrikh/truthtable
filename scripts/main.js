@@ -1,9 +1,10 @@
-require(["parser", "truthfunction", "LaTeX", "view/truthtable", "view/karnaugh", "storage", "history"],
- function(parser,    truthfunction,   LaTeX,   truthtableview,    karnaughview,    storage,   history){
+require(["parser", "truthfunction", "LaTeX", "view/truthtable", "view/karnaugh","view/minterms", "storage", "history"],
+ function(parser,    truthfunction,   LaTeX,   truthtableview,    karnaughview,   mintermsview,   storage,   history){
 'use strict';
 window.view = {};
 view.truthtable = truthtableview;
 view.karnaugh = karnaughview;
+view.minterms = mintermsview;
 
 var TruthFunction = new truthfunction.Constructor();
 
@@ -12,11 +13,19 @@ function parseAndGenerateTable(logicExpression) {
 
 	TruthFunction.setExp(parsedExpression);
 
-	view.truthtable.generate(TruthFunction, outputTruthTable);
+	view.truthtable.clear(outputTruthTable);
+	view.karnaugh.clear(outputKarnaughTable);
+	view.minterms.clear(outputMinterms);
+
+	if(TruthFunction.symlist().length < 6){
+		view.truthtable.generate(TruthFunction, outputTruthTable);
+		console.log(LaTeX.generate(TruthFunction.truthTable()));
+	} else {
+		view.minterms.generate(TruthFunction, outputMinterms);
+	}
 
 	view.karnaugh.generate(TruthFunction, outputKarnaughTable);
 
-	console.log(LaTeX.generate(TruthFunction.truthTable()));
 }
 
 var flipEl = document.getElementById("flip");
@@ -30,6 +39,7 @@ flipEl.addEventListener("change", function(){
 
 var outputTruthTable = document.getElementById("truthtable");
 var outputKarnaughTable = document.getElementById("karnaughtable");
+var outputMinterms = document.getElementById("minterms");
 
 var inputElement = document.getElementById("expressionInput"),
     permaLink = document.getElementById("permaLink");

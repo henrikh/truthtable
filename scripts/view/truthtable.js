@@ -3,6 +3,8 @@ define("view/truthtable", ["util", "view/util"], function(util, viewUtil){
 
 var exports = {};
 
+exports.clear = viewUtil.clear;
+
 function genTableRow () {
 	var tableRowHTML = "<tr>";
 	for (var i = 0; i < arguments.length; i++) {

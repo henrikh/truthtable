@@ -3,10 +3,11 @@ define("view/karnaugh", ["util", "view/util"], function(util, viewUtil){
 
 var exports = {};
 
+exports.clear = viewUtil.clear;
+
 exports.generate = function(truthfunction, outputTable) {
 	var karnaughmap = truthfunction.karnaugh();
 	if(karnaughmap === false) {
-		outputTable.innerHTML = "";
 		return false;
 	}
 

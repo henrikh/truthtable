@@ -1,5 +1,5 @@
-require(["parser", "truthfunction", "LaTeX", "view/truthtable", "view/karnaugh","view/minterms", "storage", "history"],
- function(parser,    truthfunction,   LaTeX,   truthtableview,    karnaughview,   mintermsview,   storage,   history){
+require(["parser", "truthfunction", "LaTeX", "view/truthtable", "view/karnaugh","view/minterms", "storage", "history", "qm"],
+ function(parser,    truthfunction,   LaTeX,   truthtableview,    karnaughview,   mintermsview,   storage,   history, qm){
 'use strict';
 window.view = {};
 view.truthtable = truthtableview;
@@ -16,6 +16,8 @@ function parseAndGenerateTable(logicExpression) {
 	view.truthtable.clear(outputTruthTable);
 	view.karnaugh.clear(outputKarnaughTable);
 	view.minterms.clear(outputMinterms);
+
+	console.log(qm.minimize(TruthFunction.minterms(), TruthFunction.symlist()));
 
 	if(TruthFunction.symlist().length < 6){
 		view.truthtable.generate(TruthFunction, outputTruthTable);
